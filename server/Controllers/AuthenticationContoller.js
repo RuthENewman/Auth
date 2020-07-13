@@ -1,4 +1,6 @@
+const jwt = require('jwt-simple');
 const User = require('../Models/User');
+const config = require('../config');
 
 exports.signup = function(request, response, next) {
     // See if a user with the given email address exists already
