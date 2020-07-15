@@ -2,6 +2,11 @@ const jwt = require('jwt-simple');
 const User = require('../Models/User');
 const config = require('../config');
 
+function tokenForUser(user) {
+    const timestamp = new Date().getTime();
+    return jwt.encode({ sub: user.id, iat: timestamp }, config.secret);
+}
+
 exports.signup = function(request, response, next) {
     // See if a user with the given email address exists already
     const email = request.body.email;
@@ -29,10 +34,7 @@ exports.signup = function(request, response, next) {
                 return next(error);
             }
         // Respond to the request indicating a user was created
-            response.json({ success: true });
+            response.json({ token: tokenForUser(user) });
         });
-
-
     });
-
 }
