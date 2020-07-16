@@ -1,5 +1,5 @@
 const passport = require('passport');
-const User = require('../Models/User');
+const user = require('../Models/User');
 const config = require('../config');
 const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
@@ -13,7 +13,7 @@ const jwtOptions = {
 // Create JWT strategy
 const jwtLogin = new JwtStrategy(jwtOptions, function(payload, done) {
     // See if the user ID in the payload exists in the database
-    User.findById(payload.sub, funtion(error, user){
+    user.findById(payload.sub, function(error, user) {
         if (error) {
             return done(error, false)
         }
