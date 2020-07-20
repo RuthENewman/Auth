@@ -8,7 +8,7 @@ function tokenForUser(user) {
 }
 
 exports.login = function(request, response, next) {
-    
+    response.send({ token: tokenForUser(request.user)});
 }
 
 exports.signup = function(request, response, next) {
