@@ -21,7 +21,15 @@ const localLogin = new LocalStrategy(localOptions, function(email, password, don
         }
 
         // compare passwords
-
+        user.comparePassword(password, function(error, isMatch) {
+            if (error) {
+                return done(error);
+            }
+            if (!isMatch) {
+                return done(null, false);
+            }
+            return done(null, user);
+        });
     });
 });
 
@@ -50,3 +58,4 @@ const jwtLogin = new JwtStrategy(jwtOptions, function(payload, done) {
 
 // Tell passport to use this strategy
 passport.use(jwtLogin);
+passport.use(localLogin);
