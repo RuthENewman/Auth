@@ -5,3 +5,5 @@ class Signout extends Component {
         return <div>You are now signed out.</div>
     }
 }
+
+export default Signout;
