@@ -8,6 +8,8 @@ const userSchema = new Schema({
     password: String
 });
 
+mongoose.set('useCreateIndex', true);
+
 // On save hook, encrypt password
 userSchema.pre('save', function(next) {
     // Get access to the user model
