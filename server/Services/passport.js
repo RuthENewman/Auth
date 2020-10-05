@@ -1,5 +1,5 @@
 const passport = require('passport');
-const user = require('../Models/User');
+const User = require('../Models/User');
 const config = require('../config');
 const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
@@ -11,7 +11,7 @@ const localLogin = new LocalStrategy(localOptions, function(email, password, don
     // Verify the username and password, call done with the user
     // If it is the correct username and password
     // Else call done with false
-    user.findOne({ email: email }, function(error, user) {
+    User.findOne({ email: email }, function(error, user) {
         if (error) {
             return done(error);
         }
@@ -42,7 +42,7 @@ const jwtOptions = {
 // Create JWT strategy
 const jwtLogin = new JwtStrategy(jwtOptions, function(payload, done) {
     // See if the user ID in the payload exists in the database
-    user.findById(payload.sub, function(error, user) {
+    User.findById(payload.sub, function(error, user) {
         if (error) {
             return done(error, false)
         }
