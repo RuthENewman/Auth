@@ -3,8 +3,10 @@ import { AUTH_USER, AUTH_ERROR } from './types';
 
 export const signup = (formProps, callback) => async dispatch => {
     try {
-        const response = await axios.post('http://localhost:3090/signup', formProps);
-
+        const response = await axios.post(
+            'http://localhost:3090/signup', 
+            formProps
+        );
         dispatch({ type: AUTH_USER, payload: response.data.token });
         localStorage.setItem('token', response.data.token);
         callback();
@@ -16,8 +18,10 @@ export const signup = (formProps, callback) => async dispatch => {
 
 export const login = (formProps, callback) => async dispatch => {
     try {
-        const response = await axios.post('http://localhost:3090/login', formProps);
-
+        const response = await axios.post(
+            'http://localhost:3090/login', 
+            formProps
+        );
         dispatch({ type: AUTH_USER, payload: response.data.token });
         localStorage.setItem('token', response.data.token);
         callback();
@@ -26,7 +30,6 @@ export const login = (formProps, callback) => async dispatch => {
     }
 }
    
-
 export const signout = () => {
     localStorage.removeItem('token');
 
